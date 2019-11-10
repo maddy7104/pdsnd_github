@@ -131,9 +131,8 @@ def station_stats(df):
     print('-'*40)
 
 
-def timedelta_h_m_s(time_delta_object):
-    """Converts a timedelta object's "total_seconds" method value to hour, minute, and second"""
-    seconds = time_delta_object.total_seconds()
+def seconds_to_h_m_s(seconds):
+    """Converts seconds value to equivalent hour, minute, and seconds"""
     hours = (seconds // 3600)
     minutes = (seconds // 60) % 60
     seconds = seconds % 60
@@ -147,14 +146,12 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    df['Travel Time'] = df['End Time'] - df['Start Time']
-    travel_time_hours, travel_time_minutes, travel_time_seconds = timedelta_h_m_s(df['Travel Time'].sum())
-    print( "Total travel time is {} hours, {} minutes, and {} seconds".format(travel_time_hours,travel_time_minutes,travel_time_seconds) )
-
+    trip_duration_hours, trip_duration_minutes, trip_duration_seconds = seconds_to_h_m_s(df['Trip Duration'].sum())
+    print( "Total travel time is {} hours, {} minutes, and {} seconds".format(trip_duration_hours,trip_duration_minutes,trip_duration_seconds) )
 
     # TO DO: display mean travel time
-    travel_time_hours, travel_time_minutes, travel_time_seconds = timedelta_h_m_s(df['Travel Time'].mean())
-    print( "Mean travel time is {} minutes and {} seconds".format(travel_time_minutes,travel_time_seconds) )
+    trip_duration_hours, trip_duration_minutes, trip_duration_seconds = seconds_to_h_m_s(df['Trip Duration'].mean())
+    print( "Mean travel time is {} minutes and {} seconds".format(trip_duration_minutes,trip_duration_seconds) )
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
